@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Expense Tracker</title>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Expense Tracker v1</h1>
+
+      <label for="apiKey">Gemini API Key:</label>
+      <input
+        type="password"
+        id="apiKey"
+        placeholder="Enter your api key here"
+      />
+
+      <label for="query">query:</label>
+      <input
+        type="text"
+        id="query"
+        placeholder='e.g., "maine 400 rupye kharche on kfc"'
+      />
+
+      <button onclick="processQuery()" id="submitBtn">Submit</button>
+
+      <div class="output-section">
+        <h2>Parsed Output:</h2>
+        <div id="output" class="output-box">
+          Enter your query above to see the parsed result...
+        </div>
+      </div>
+    </div>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
