@@ -1,0 +1,3 @@
+Amount: 400, Category: food
+Amount: 500, Category: entertainment
+Amount: 70, Category: food
