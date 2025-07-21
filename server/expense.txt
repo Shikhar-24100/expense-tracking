@@ -1,3 +1,12 @@
 Amount: 400, Category: food
 Amount: 500, Category: entertainment
 Amount: 70, Category: food
+Amount: 600, Category: mobile repair
+Amount: 400, Category: food
+Amount: 200, Category: repair
+Amount: 400, Category: food
+Amount: 400, Category: food
+Amount: 200, Category: food
+Amount: 400, Category: food
+Amount: 400, Category: food
+Amount: 400, Category: food

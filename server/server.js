@@ -37,6 +37,14 @@ app.post("/v1/save", (req, res) => {
   return res.json({ success: true, savedTo: `${type}.txt` });
 });
 
+app.post("/v1/save1", (req, res) => {
+  console.log("Received in /v1/save1:", req.body);
+  const { type, toWhom, fromWhom } = req.body;
+  // console.log(req.body);
+
+  return res.json({ success: true });
+});
+
 const PORT = 4000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
