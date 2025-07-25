@@ -347,7 +347,7 @@ async function saveToBackend1(data) {
   try {
     const queryParams = new URLSearchParams(data).toString();
     const response = await fetch(
-      `https://407e58ec-8c85-460b-b258-b2be45836e13-00-3grgi1z3o3r5s.pike.repl.co:3000/v1/save1?${queryParams}`,
+      `https://407e58ec-8c85-460b-b258-b2be45836e13-00-3grgi1z3o3r5s.pike.repl.co:3000/v1/save?${queryParams}`,
       {
         method: "GET",
       },

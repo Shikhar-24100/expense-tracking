@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
 
 const expenseSchema = new mongoose.Schema({
-  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+  // userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
   amount: { type: Number, required: true },
   category: { type: String, default: 'uncategorized' },
-  reason: { type: String },
+  // reason: { type: String },
   timestamp: { type: Date, default: Date.now }
 });
 

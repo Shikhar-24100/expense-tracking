@@ -14,7 +14,7 @@
     "dotenv": "^17.2.0",
     "express": "^5.1.0",
     "fs": "^0.0.1-security",
-    "mongoose": "^8.16.4",
+    "mongoose": "^8.16.5",
     "path": "^0.12.7"
   },
   "description": ""
