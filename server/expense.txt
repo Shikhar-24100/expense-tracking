@@ -10,3 +10,12 @@ Amount: 200, Category: food
 Amount: 400, Category: food
 Amount: 400, Category: food
 Amount: 400, Category: food
+Amount: 15, Category: food
+Amount: 400, Category: food(kfc)
+Amount: 15, Category: food(samose)
+Amount: 400, Category: food(kfc)
+Amount: 400, Category: food(kfc)
+Amount: 400, Category: food(kfc)
+Amount: 400, Category: food(kfc)
+Amount: 350, Category: shopping
+Amount: 100, Category: transportation

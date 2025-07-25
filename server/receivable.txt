@@ -11,3 +11,7 @@ Amount: 200, From: My mother
 Amount: 200, From: mama
 Amount: 500, From: ansh
 Amount: 35, From: deepak
+Amount: 69, From: motendra
+Amount: 200, From: deepak
+Amount: 700, From: tiwari
+Amount: 320, From: ansh

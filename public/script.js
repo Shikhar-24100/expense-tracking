@@ -91,7 +91,7 @@ async function processQuery() {
     "amount": number,
     "toWhom": string (only if type is "toPay"),
     "fromWhom": string (only if type is "toGet"), 
-    "category": string (food, transportation, shopping, entertainment, etc.)
+    "category": string (food, transportation, shopping, entertainment, etc, 'none' if not applicable))
   }
 
   CRITICAL HINDI/HINGLISH PATTERNS - PAY CLOSE ATTENTION:
@@ -303,7 +303,12 @@ async function processQuery1() {
     console.log("Successfully parsed:", parsed);
 
     //post request to the backend
-    await saveToBackend1(parsed);
+    const backendResponse = await saveToBackend1(parsed);
+
+    if (backendResponse) {
+      outputBox.textContent = `\n\n🔄 Backend Response:\n${JSON.stringify(backendResponse, null, 2)}`;
+      outputBox.className = "output-box success";
+    }
   } catch (error) {
     console.error("Error:", error);
     outputBox.textContent = `Error: ${error.message}`;
@@ -340,12 +345,11 @@ async function saveToBackend(data) {
 
 async function saveToBackend1(data) {
   try {
+    const queryParams = new URLSearchParams(data).toString();
     const response = await fetch(
-      "https://407e58ec-8c85-460b-b258-b2be45836e13-00-3grgi1z3o3r5s.pike.repl.co:3000/v1/save1", // or another endpoint
+      `https://407e58ec-8c85-460b-b258-b2be45836e13-00-3grgi1z3o3r5s.pike.repl.co:3000/v1/save1?${queryParams}`,
       {
-        method: "POST", // ✅ Use POST instead
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+        method: "GET",
       },
     );
 
