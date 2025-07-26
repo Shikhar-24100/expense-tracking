@@ -15,33 +15,10 @@
         id="apiKey"
         placeholder="Enter your api key here"
       />
-
-      <label for="query">query:</label>
-      <input
-        type="text"
-        id="query"
-        placeholder='e.g., "maine 400 rupye kharche on kfc"'
-      />
-
-      <button onclick="processQuery()" id="submitBtn">Submit</button>
-
-      <div>idk</div>
-      <label for="query1">query1:</label>
-      <input
-        type="text"
-        id="query1"
-        placeholder='e.g., "pichle ek week me kitne paise kharche the"'
-      />
-      <button onclick="processQuery1()" id="submitBtn1">Submit</button>
-
-      <div class="output-section">
-        <h2>Parsed Output:</h2>
-        <div id="output" class="output-box">
-          Enter your query above to see the parsed result...
-        </div>
-      </div>
-    </div>
-
-    <script src="./script.js"></script>
+      <label for="query">query/transaction:</label>
+    <input type="text" id="unifiedQuery" placeholder="Enter expense or query">
+    <button id="submitBtn" onclick="processUnifiedQuery()">Submit</button>
+    <div id="output" class="output-box"></div>
+    <script src="./main.js"></script>
   </body>
 </html>
