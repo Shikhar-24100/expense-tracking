@@ -20,3 +20,15 @@ externalPort = 80
 [[ports]]
 localPort = 4000
 externalPort = 3000
+
+[workflows]
+runButton = "Start Server"
+
+[[workflows.workflow]]
+name = "Start Server"
+author = 34282383
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "cd server && node server.js"
