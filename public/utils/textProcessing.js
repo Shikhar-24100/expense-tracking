@@ -9,6 +9,8 @@ export function extractJSON(text) {
     }
   }
 
+  //bullshit
+  
   //If no JSON found, try to extract from code blocks
   const codeBlockMatch = text.match(/```(?:json)?\s*(\{[\s\S]*?\})\s*```/);
   if (codeBlockMatch) {
