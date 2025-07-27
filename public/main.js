@@ -227,7 +227,6 @@ function formatQueryResults(results, query) {
 
 async function syncEntryWithBackend(entry, type) {
   try {
-    
     const backendData = {
       type: type === 'expenses' ? 'expense' : type.replace(/([A-Z])/g, '$1'),
       amount: entry.amount,
@@ -239,6 +238,20 @@ async function syncEntryWithBackend(entry, type) {
 
     const saved = await backendService.saveTransaction(backendData);
     entry._id = saved._id; // Store backend ID for future reference
+    
+    // Update the entry in the appropriate array with the backend ID
+    if (type === 'expenses') {
+      const index = expenses.findIndex(item => item.id === entry.id);
+      if (index !== -1) expenses[index] = entry;
+    } else if (type === 'toPay') {
+      const index = toPay.findIndex(item => item.id === entry.id);
+      if (index !== -1) toPay[index] = entry;
+    } else if (type === 'toGet') {
+      const index = toGet.findIndex(item => item.id === entry.id);
+      if (index !== -1) toGet[index] = entry;
+    }
+    
+    await saveData(); // Save updated data with backend IDs
     console.log('Entry synced with backend:', entry);
   } catch (error) {
     console.error('Backend sync error:', error);
@@ -276,13 +289,36 @@ function renderAllLists() {
 }
 
 async function deleteItem(type, id) {
-  if (type === 'expenses') expenses = expenses.filter(item => item.id !== id);
-  else if (type === 'to-pay') toPay = toPay.filter(item => item.id !== id);
-  else if (type === 'to-get') toGet = toGet.filter(item => item.id !== id);
+  let deletedItem = null;
+  
+  // Find and remove from local arrays
+  if (type === 'expenses') {
+    deletedItem = expenses.find(item => item.id === id);
+    expenses = expenses.filter(item => item.id !== id);
+  } else if (type === 'to-pay') {
+    deletedItem = toPay.find(item => item.id === id);
+    toPay = toPay.filter(item => item.id !== id);
+  } else if (type === 'to-get') {
+    deletedItem = toGet.find(item => item.id === id);
+    toGet = toGet.filter(item => item.id !== id);
+  }
 
+  // Update local storage
   await saveData();
   renderAllLists();
   updateStats();
+
+  // Delete from backend if it has a backend ID
+  if (deletedItem && deletedItem._id) {
+    try {
+      const backendType = type === 'expenses' ? 'expense' : type.replace('-', '');
+      await backendService.deleteTransaction(backendType, deletedItem._id);
+      console.log('Item deleted from backend:', deletedItem);
+    } catch (error) {
+      console.error('Failed to delete from backend:', error);
+      // Could show a warning to user that local delete succeeded but backend delete failed
+    }
+  }
 }
 
 // Stats calculation (enhanced)

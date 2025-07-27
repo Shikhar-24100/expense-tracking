@@ -28,6 +28,37 @@ exports.saveData = async (req, res) => {
   }
 };
 
+exports.deleteData = async (req, res) => {
+  const { type, id } = req.params;
+
+  try {
+    let deletedEntry;
+
+    switch (type) {
+      case "expense":
+        deletedEntry = await Expense.findByIdAndDelete(id);
+        break;
+      case "toPay":
+        deletedEntry = await Payable.findByIdAndDelete(id);
+        break;
+      case "toGet":
+        deletedEntry = await Receivable.findByIdAndDelete(id);
+        break;
+      default:
+        return res.status(400).json({ error: "Invalid type" });
+    }
+
+    if (!deletedEntry) {
+      return res.status(404).json({ error: "Entry not found" });
+    }
+
+    return res.json({ message: "Entry deleted successfully", deletedEntry });
+  } catch (err) {
+    console.error("MongoDB delete error:", err);
+    return res.status(500).json({ error: "Server error" });
+  }
+};
+
 exports.getData = async (req, res) => {
   const { type, toWhom, fromWhom, category } = req.query;
 

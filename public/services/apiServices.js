@@ -91,4 +91,23 @@ export class BackendService {
       throw error;
     }
   }
+
+  async deleteTransaction(type, backendId) {
+    try {
+      const response = await fetch(`${this.baseUrl}/v1/save/${type}/${backendId}`, {
+        method: "DELETE",
+      });
+
+      if (!response.ok) {
+        throw new Error(`Backend delete error: ${response.status}`);
+      }
+
+      const result = await response.json();
+      console.log("Deleted from backend:", result);
+      return result;
+    } catch (error) {
+      console.error("Backend delete error:", error);
+      throw error;
+    }
+  }
 }
