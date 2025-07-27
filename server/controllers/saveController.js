@@ -7,18 +7,18 @@ exports.saveData = async (req, res) => {
 
   try {
     switch (type) {
-      case "expense":
-        await Expense.create({ amount, category });
-        return res.json({ success: true, savedTo: "expenses collection" });
-
-      case "toPay":
-        await Payable.create({ amount, toWhom });
-        return res.json({ success: true, savedTo: "payables collection" });
-
-      case "toGet":
-        await Receivable.create({ amount, fromWhom });
-        return res.json({ success: true, savedTo: "receivables collection" });
-
+      case "expense":{
+        const newEntry = await Expense.create({ amount, category });
+        return res.json(newEntry);
+      }
+      case "toPay": {
+        const newEntry = await Payable.create({ amount, toWhom });
+        return res.json(newEntry);
+      }
+      case "toGet":{
+        const newEntry = await Receivable.create({ amount, fromWhom });
+        return res.json(newEntry);
+      }   
       default:
         return res.status(400).json({ error: "Invalid type" });
     }

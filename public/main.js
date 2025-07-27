@@ -92,7 +92,7 @@ async function submitModal() {
     label, 
     amount, 
     date: new Date().toLocaleDateString(),
-    category: 'manual' // Default category for manual entries
+    category: label.toLowerCase()
   };
 
   // Add to appropriate array
@@ -224,10 +224,10 @@ function formatQueryResults(results, query) {
   }
 }
 
-// Sync individual entry with backend
+
 async function syncEntryWithBackend(entry, type) {
   try {
-    // Convert frontend entry to backend format
+    
     const backendData = {
       type: type === 'expenses' ? 'expense' : type.replace(/([A-Z])/g, '$1'),
       amount: entry.amount,
@@ -237,8 +237,9 @@ async function syncEntryWithBackend(entry, type) {
     if (type === 'toPay') backendData.toWhom = entry.label;
     if (type === 'toGet') backendData.fromWhom = entry.label;
 
-    await backendService.saveTransaction(backendData);
-    console.log('Entry synced with backend:', backendData);
+    const saved = await backendService.saveTransaction(backendData);
+    entry._id = saved._id; // Store backend ID for future reference
+    console.log('Entry synced with backend:', entry);
   } catch (error) {
     console.error('Backend sync error:', error);
   }
